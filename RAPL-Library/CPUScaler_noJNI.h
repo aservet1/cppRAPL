@@ -1,9 +1,9 @@
-#ifndef CPUSCALER_H
-#define CPUSCALER_H
+#ifndef CPUSCALER_noJNI_H
+#define CPUSCALER_noJNI_H
 
 
-#include "arch_spec.h"
-#include "msr.h"
+#include "arch_spec_noJNI.h"
+#include "msr_noJNI.h"
 
 //static rapl_msr_parameter *parameters;
 //static int *fd;

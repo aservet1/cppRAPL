@@ -1,12 +1,11 @@
 #include <stdio.h>
-//#include <jni.h>
 #include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include <math.h>
 #include <stdint.h>
 #include <string.h>
-#include "arch_spec.h"
+#include "arch_spec_noJNI.h"
 //#include <sys/time.h> 	// should confirm before removing, but i think these two commented out #include statements were from
 //#include <sys/types.h>	// when we were doing timing inside these functions, but now we aren't so we can remove?
 
@@ -127,7 +126,7 @@ uint64_t get_num_pkg_core()
 
 	Below used to be global variables (hey i made these not global any more, should
     probably update the comments for all the functions at some point...)
-    
+
 	  num_core_thread; 	//number of physical threads per core
 	  num_pkg_thread; 	//number of physical threads per package
 	  num_pkg_core;		//number of cores per package
@@ -149,15 +148,15 @@ int get_architecture_category(uint32_t cpu_model){
   			case HASWELL3:				case HASWELL_EP:	case SKYLAKE1:
   			case SKYLAKE2: 				case BROADWELL:		case BROADWELL2:
   			case APOLLOLAKE:			case COFFEELAKE2:
-  				
+
 				return READ_FROM_DRAM;
 
   		case SANDYBRIDGE:	case IVYBRIDGE:	case KABYLAKE:
-  			
+
 				return READ_FROM_GPU;
 
   		default:
-  			
+
 				return UNDEFINED_ARCHITECTURE;
   }
 }

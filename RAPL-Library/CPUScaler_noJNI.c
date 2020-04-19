@@ -7,37 +7,14 @@
 #include <string.h>
 #include <inttypes.h>
 #include "CPUScaler_noJNI.h"
-#include "arch_spec.h"
-#include "msr.h"
+#include "arch_spec_noJNI.h"
+#include "msr_noJNI.h"
 #include <sys/time.h>
 #include <sys/types.h>
 
 static rapl_msr_parameter *parameters;
 static int *fd;
 static uint64_t num_pkg;
-
-/* Used when timing functions for test stuff, not part of actual energy measurements */
-/*static int timeval_subtract (struct timeval *result, struct timeval *x, struct timeval *y)
-{
-  /// Perform the carry for the later subtraction by updating y.
-  if (x->tv_usec < y->tv_usec) {
-    int nsec = (y->tv_usec - x->tv_usec) / 1000000 + 1;
-    y->tv_usec -= 1000000 * nsec;
-    y->tv_sec += nsec;
-  }
-  if (x->tv_usec - y->tv_usec > 1000000) {
-    int nsec = (x->tv_usec - y->tv_usec) / 1000000;
-    y->tv_usec += 1000000 * nsec;
-    y->tv_sec -= nsec;
-  }
-
-  // Compute the time remaining to wait. tv_usec is certainly positive.
-  result->tv_sec = x->tv_sec - y->tv_sec;
-  result->tv_usec = x->tv_usec - y->tv_usec;
-
-  // Return 1 if result is negative.
-  return x->tv_sec < y->tv_sec;
-}*/
 
 /** <Alejandro's Interpretation>
  *  Takes the energy info and packages it into a formatted string... # delimits the 3 energy attribs and @ delimits multiple package readings (1 pkg = 3 energy attribs)
@@ -63,7 +40,6 @@ copy_to_string(char *ener_info, char uncore_buffer[60], int uncore_num, char cpu
 	}
 
 }
-
 
 /* Assumed to be called only during or after ProfileInit, when static variable fd[] is initialized */
 rapl_msr_unit

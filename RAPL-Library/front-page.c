@@ -7,7 +7,7 @@ void
 getEnergyStats()
 {
 	char* rapl_energy_info = EnergyStatCheck();
-	printf("%s\n",rapl_energy_info);	
+	printf("%s\n",rapl_energy_info);
 	free(rapl_energy_info);
 }
 

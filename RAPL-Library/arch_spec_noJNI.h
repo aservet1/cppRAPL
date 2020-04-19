@@ -1,8 +1,8 @@
 #include <stdint.h>
 #include <unistd.h>
-#ifndef _ARCH_SPEC_H
-#define _ARCH_SPEC_H
-#include "msr.h"
+#ifndef _ARCH_SPEC_noJNI_H
+#define _ARCH_SPEC_noJNI_H
+#include "msr_noJNI.h"
 
 /**
  * Reference Intel ® 64 and IA-32 Architectures Software Developer’s Manual
@@ -99,4 +99,4 @@ rapl_msr_unit get_rapl_unit();
 
 int get_architecture_category(uint32_t cpu_model);
 
-#endif
+#endif //ARCH_SPEC_noJNI_H

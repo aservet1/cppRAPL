@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <math.h>
 
-#include "msr.h"
-#include "arch_spec.h"
+#include "msr_noJNI.h"
+#include "arch_spec_noJNI.h"
+#include "CPUScaler_noJNI.h"
 
 
 /** Note that when reaserching MSR, it stands for Model-Specific Register, not to be
