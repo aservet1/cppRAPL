@@ -16,12 +16,12 @@
 #define IVYBRIDGE            0x3AU
 #define SKYLAKE1             0x4EU
 #define SKYLAKE2             0x5EU
-#define HASWELL1			       0x3CU
-#define HASWELL2			       0x45U
-#define HASWELL3			       0x46U
-#define HASWELL_EP			     0x3FU
-#define BROADWELL			       0xD4U
-#define BROADWELL2	     	   0x4FU
+#define HASWELL1			 0x3CU
+#define HASWELL2			 0x45U
+#define HASWELL3			 0x46U
+#define HASWELL_EP			 0x3FU
+#define BROADWELL			 0xD4U
+#define BROADWELL2	     	 0x4FU
 
 #define APOLLOLAKE          0x5CU //alejandro's computer
 #define COFFEELAKE2          0x9eU // rutvik's first computer
