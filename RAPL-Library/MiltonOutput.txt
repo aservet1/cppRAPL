@@ -1,0 +1,5 @@
+Energy Unit: 0.000061 Wrap Around: 16384.000000
+466.651917#235.653381#1010.793518
+--------------------
+cpu model is: 4E
+reads from dram buffer
