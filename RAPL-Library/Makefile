@@ -1,6 +1,6 @@
 CFLAGS = -fPIC -g -Wall
 
-CFILES = CPUScaler_noJNI.c arch_spec.c msr.c front-page.c
+CFILES = CPUScaler_noJNI-temp.c arch_spec.c msr.c front-page.c
 OFILES = $(CFILES:.c=.o)
 HFILES = $(CFILES:.c=.h)
 

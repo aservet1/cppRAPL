@@ -60,7 +60,7 @@ get_rapl_unit()
 //JNIEXPORT jint JNICALL Java_jrapl_EnergyCheckUtils_ProfileInit(JNIEnv *env, jclass jcls) {
 int
 ProfileInit() {
-	/*timing*///struct timeval start, end, diff; gettimeofday(&start, NULL);
+	
 
 	int i;
 	char msr_filename[BUFSIZ];
@@ -87,8 +87,8 @@ ProfileInit() {
 	rapl_unit = get_rapl_unit();
 	wraparound_energy = get_wraparound_energy(rapl_unit.energy);
 
-	/*timing*///gettimeofday(&end,NULL); timeval_subtract(&diff, &end, &start);
-	/*timing*///printf("ProfileInit(): %ld\n", diff.tv_sec*1000 + diff.tv_usec);
+	
+	
 
 	return wraparound_energy;
 }
@@ -100,12 +100,12 @@ ProfileInit() {
  */
 //JNIEXPORT jint JNICALL Java_jrapl_EnergyCheckUtils_GetSocketNum(JNIEnv *env, jclass jcls) {
 int GetSocketNum() {
-  /*timing*///struct timeval start, end, diff; gettimeofday(&start, NULL);
+  
 
   int socketNum = getSocketNum();
 
-  /*timing*///gettimeofday(&end,NULL); timeval_subtract(&diff, &end, &start);
-  /*timing*///printf("GetSocketNum(): %ld\n", diff.tv_sec*1000 + diff.tv_usec);
+  
+  
 
   return socketNum;
 }
@@ -122,7 +122,7 @@ int GetSocketNum() {
 void
 initialize_energy_info(char gpu_buffer[num_pkg][60], char dram_buffer[num_pkg][60], char cpu_buffer[num_pkg][60], char package_buffer[num_pkg][60]) {
 
-	/*timing*///struct timeval start, end, diff;
+	
 	uint32_t cpu_model = get_cpu_model();
 	double package[num_pkg];
 	double pp0[num_pkg];
@@ -134,17 +134,17 @@ initialize_energy_info(char gpu_buffer[num_pkg][60], char dram_buffer[num_pkg][6
 	rapl_msr_unit rapl_unit = get_rapl_unit();
 	for (; i < num_pkg; i++) {
 
-		/*timing*///gettimeofday(&start, NULL);
+		
 		result = read_msr(fd[i], MSR_PKG_ENERGY_STATUS);	//First 32 bits so don't need shift bits.
 		package[i] = (double) result * rapl_unit.energy;
-		/*timing*///gettimeofday(&end,NULL); timeval_subtract(&diff, &end, &start);
-		/*timing*///printf("Time reading PACKAGE MSR for Socket%d: %ld\n", i, diff.tv_sec*1000 + diff.tv_usec);
+		
+		
 
-		/*timing*///gettimeofday(&start, NULL);
+		
 		result = read_msr(fd[i], MSR_PP0_ENERGY_STATUS);
 		pp0[i] = (double) result * rapl_unit.energy;
-		/*timing*///gettimeofday(&end,NULL); timeval_subtract(&diff, &end, &start);
-		/*timing*///printf("Time reading CORE MSR for Socket%d: %ld\n", i, diff.tv_sec*1000 + diff.tv_usec);
+		
+		
 
 
 		sprintf(package_buffer[i], "%f", package[i]);
@@ -152,10 +152,10 @@ initialize_energy_info(char gpu_buffer[num_pkg][60], char dram_buffer[num_pkg][6
 		int architecture_category = get_architecture_category(cpu_model);
 		switch(architecture_category) {
 			case READ_FROM_DRAM:
-				/*timing*///gettimeofday(&start, NULL);
+				
 				result = read_msr(fd[i],MSR_DRAM_ENERGY_STATUS);
-				/*timing*///gettimeofday(&end,NULL); timeval_subtract(&diff, &end, &start);
-				/*timing*///printf("Time reading DRAM MSR for Socket%d: %ld\n", i, diff.tv_sec*1000 + diff.tv_usec);
+				
+				
 				if (cpu_model == BROADWELL || cpu_model == BROADWELL2) {
 					dram[i] =(double)result*MSR_DRAM_ENERGY_UNIT;
 				} else {
@@ -170,10 +170,10 @@ initialize_energy_info(char gpu_buffer[num_pkg][60], char dram_buffer[num_pkg][6
 
 				break;
 			case READ_FROM_GPU:
-				/*timing*///gettimeofday(&start, NULL);
+				
 				result = read_msr(fd[i],MSR_PP1_ENERGY_STATUS);
-				/*timing*///gettimeofday(&end,NULL); timeval_subtract(&diff, &end, &start);
-				/*timing*///printf("Time reading GPU MSR for Socket%d: %ld\n", i, diff.tv_sec*1000 + diff.tv_usec);
+				
+				
 				pp1[i] = (double) result *rapl_unit.energy;
 
 				sprintf(gpu_buffer[i], "%f", pp1[i]);
@@ -200,7 +200,7 @@ initialize_energy_info(char gpu_buffer[num_pkg][60], char dram_buffer[num_pkg][6
 //JNIEXPORT jstring JNICALL Java_jrapl_EnergyCheckUtils_EnergyStatCheck(JNIEnv *env, jclass jcls) {
 char*
 EnergyStatCheck() {
-	/*timing*///struct timeval start, end, diff; gettimeofday(&start, NULL);
+	
 
 	char gpu_buffer[num_pkg][60];
 	char dram_buffer[num_pkg][60];
@@ -280,8 +280,8 @@ EnergyStatCheck() {
 		}
 	}
 
-	/*timing*///gettimeofday(&end,NULL); timeval_subtract(&diff, &end, &start);
-	/*timing*///printf("EnergyStatCheck(): %ld\n", diff.tv_sec*1000 + diff.tv_usec);
+	
+	
 
   return ener_info;
 
@@ -293,11 +293,11 @@ EnergyStatCheck() {
 //JNIEXPORT void JNICALL Java_jrapl_EnergyCheckUtils_ProfileDealloc(JNIEnv * env, jclass jcls) {
 void ProfileDealloc()
 {
-  /*timing*///struct timeval start, end, diff; gettimeofday(&start, NULL);
+  
 
 	free(fd);
 	free(parameters);
 
-  /*timing*///gettimeofday(&end,NULL); timeval_subtract(&diff, &end, &start);
-  /*timing*///printf("ProfileDealloc(): %ld\n", diff.tv_sec*1000 + diff.tv_usec);
+  
+  
 }
