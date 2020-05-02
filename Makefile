@@ -1,11 +1,14 @@
 CXXFILES = main.cpp #and also the one(s) that define(s) the sorting algorithms
 TARGET = main
 
-all: $(TARGET)
+all: $(TARGET) .gitignore
 
 $(TARGET): $(CXXFILES)
 	g++ $(CXXFILES) -L./RAPL-Library -lCPUScaler -o $@
-	echo $(TARGET) >> .gitignore
+
+.gitignore: $(CXXFILES)
+	cat </dev/null >@
+	for t in $(TARGET); do echo $$t >>@; done
 
 clean:
 	rm -f $(TARGET)

@@ -16,7 +16,7 @@ getEnergyStatString()
 {
 	char* rapl_energy_info = EnergyStatCheck();
 	string rapl_energy_info_string(rapl_energy_info);
-	free(rapl_energy_info);
+	free(rapl_energy_info); //@TODO -- this doesn't actually free
 	return rapl_energy_info_string;
 }
 

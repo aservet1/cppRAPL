@@ -7,7 +7,7 @@ HFILES = $(CFILES:.c=.h)
 LIB = libCPUScaler.a
 TARGET = $(LIB) $(OFILES)
 
-all: library
+all: library .gitignore
 
 common:
 	gcc $(CFLAGS) $(CFILES)
@@ -15,7 +15,11 @@ common:
 library: common
 	ar -rc $(LIB) $(OFILES)
 	ranlib $(LIB)
-	echo $(TARGET) >> .gitignore
+
+.gitignore: $(CXXFILES)
+	cat </dev/null >@
+	for t in $(TARGET); do echo $$t >>@; done
+
 
 clean:
 	rm -f $(OFILES) $(LIB)
