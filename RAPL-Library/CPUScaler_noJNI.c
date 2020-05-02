@@ -57,11 +57,8 @@ get_rapl_unit()
  *  the 'fd' array is an array of which msr regs. num msr regs is number of packages the computer has
  *  initializes the rapl unit (stuff holding the conversions to translate msr data sections into meaningful 'human-readable' stuff)
  */
-//JNIEXPORT jint JNICALL Java_jrapl_EnergyCheckUtils_ProfileInit(JNIEnv *env, jclass jcls) {
 int
 ProfileInit() {
-	
-
 	int i;
 	char msr_filename[BUFSIZ];
 	int core = 0;
@@ -87,25 +84,17 @@ ProfileInit() {
 	rapl_unit = get_rapl_unit();
 	wraparound_energy = get_wraparound_energy(rapl_unit.energy);
 
-	
-	
-
 	return wraparound_energy;
 }
 
 
 
 /** <Alejandro's Interpretation>
- * Gets num of cpu sockets but casts it as a jint for the java end of things
+ * Gets num of cpu sockets
  */
-//JNIEXPORT jint JNICALL Java_jrapl_EnergyCheckUtils_GetSocketNum(JNIEnv *env, jclass jcls) {
 int GetSocketNum() {
-  
 
   int socketNum = getSocketNum();
-
-  
-  
 
   return socketNum;
 }
@@ -120,9 +109,8 @@ int GetSocketNum() {
  *  Interpret/process MSR reading for dram differently based on CPU model before storing it in the buffer.......................
  */
 void
-initialize_energy_info(char gpu_buffer[num_pkg][60], char dram_buffer[num_pkg][60], char cpu_buffer[num_pkg][60], char package_buffer[num_pkg][60]) {
-
-	
+initialize_energy_info(char gpu_buffer[num_pkg][60], char dram_buffer[num_pkg][60], char cpu_buffer[num_pkg][60], char package_buffer[num_pkg][60])
+{
 	uint32_t cpu_model = get_cpu_model();
 	double package[num_pkg];
 	double pp0[num_pkg];
@@ -134,28 +122,19 @@ initialize_energy_info(char gpu_buffer[num_pkg][60], char dram_buffer[num_pkg][6
 	rapl_msr_unit rapl_unit = get_rapl_unit();
 	for (; i < num_pkg; i++) {
 
-		
 		result = read_msr(fd[i], MSR_PKG_ENERGY_STATUS);	//First 32 bits so don't need shift bits.
 		package[i] = (double) result * rapl_unit.energy;
-		
-		
 
-		
 		result = read_msr(fd[i], MSR_PP0_ENERGY_STATUS);
 		pp0[i] = (double) result * rapl_unit.energy;
-		
-		
-
 
 		sprintf(package_buffer[i], "%f", package[i]);
 		sprintf(cpu_buffer[i], "%f", pp0[i]);
 		int architecture_category = get_architecture_category(cpu_model);
 		switch(architecture_category) {
 			case READ_FROM_DRAM:
-				
 				result = read_msr(fd[i],MSR_DRAM_ENERGY_STATUS);
-				
-				
+
 				if (cpu_model == BROADWELL || cpu_model == BROADWELL2) {
 					dram[i] =(double)result*MSR_DRAM_ENERGY_UNIT;
 				} else {
@@ -170,10 +149,8 @@ initialize_energy_info(char gpu_buffer[num_pkg][60], char dram_buffer[num_pkg][6
 
 				break;
 			case READ_FROM_GPU:
-				
 				result = read_msr(fd[i],MSR_PP1_ENERGY_STATUS);
-				
-				
+
 				pp1[i] = (double) result *rapl_unit.energy;
 
 				sprintf(gpu_buffer[i], "%f", pp1[i]);
@@ -197,10 +174,8 @@ initialize_energy_info(char gpu_buffer[num_pkg][60], char dram_buffer[num_pkg][6
  * The second entry is: CPU energy
  * The third entry is: Package energy
  */
-//JNIEXPORT jstring JNICALL Java_jrapl_EnergyCheckUtils_EnergyStatCheck(JNIEnv *env, jclass jcls) {
 char*
 EnergyStatCheck() {
-	
 
 	char gpu_buffer[num_pkg][60];
 	char dram_buffer[num_pkg][60];
@@ -213,7 +188,6 @@ EnergyStatCheck() {
 	int package_num = 0L;
 	int gpu_num = 0L;
 	//construct a string
-	//char ener_info[512];
 	char* ener_info = (char*)malloc(sizeof(char)*512);
 	int i;
 	int offset = 0;
@@ -280,9 +254,6 @@ EnergyStatCheck() {
 		}
 	}
 
-	
-	
-
   return ener_info;
 
 }
@@ -290,14 +261,8 @@ EnergyStatCheck() {
 /** <Alejandro's Interpretation>
  * Free memory allocated by profile init function
  */
-//JNIEXPORT void JNICALL Java_jrapl_EnergyCheckUtils_ProfileDealloc(JNIEnv * env, jclass jcls) {
 void ProfileDealloc()
 {
-  
-
 	free(fd);
 	free(parameters);
-
-  
-  
 }
