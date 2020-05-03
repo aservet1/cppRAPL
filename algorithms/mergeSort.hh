@@ -1,5 +1,5 @@
 #ifndef MERGE_SORT_HH
-	#define MERGE_SORT_HH
+#define MERGE_SORT_HH
 
 #include <iostream>
 
@@ -9,7 +9,6 @@
 
 #include "sorts.hh"
 
-const int THRESHOLD = 10;
 
 //.beginMSort
 //sort a[lo, hi) using temp[] as temporary storage

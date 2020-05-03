@@ -1,27 +1,25 @@
-#ifndef INSERTION_SORT_HH
-	#define INSERTION_SORT_HH
+#ifndef SORTS_HH
+#define SORTS_HH
 
-static void
-swap(int a[], int i, int j)
-{
-  int t = a[i];
+const int THRESHOLD = 10;
+
+template <typename E>
+static void swap(E a[], int i, int j){
+  E t = a[i];
   a[i] = a[j];
   a[j] = t;
 }
 
-static bool
-isSorted(int a[], int n)
-{
+template <typename E>
+static bool isSorted(int a[], int n){
   for (int i = 1; i < n; ++i) {
     if (a[i] < a[i - 1]) return 0;
   }
   return 1;
 }
 
-//.beginBubbleSort.
-void
-bubbleSort(int a[], int n)
-{
+template <typename E>
+void bubbleSort(E a[], int n){
   for (int i = 0; i < n - 1; ++i) {
     assert(isSorted(a, i) && "prefix not sorted");
     for (int j = n - 1; j > i; --j) {
@@ -29,12 +27,9 @@ bubbleSort(int a[], int n)
     }
   }
 }
-//.endBubbleSort.
 
-//.beginInsertionSort.
-void
-insertionSort(int a[], int n)
-{
+template <typename E>
+void insertionSort(E a[], int n){
   for (int i = 1; i < n; ++i) {
     assert(isSorted(a, i) && "prefix not sorted");
     //insert i'th record into sorted portion
@@ -43,6 +38,6 @@ insertionSort(int a[], int n)
     }
   }
 }
-//.endInsertionSort.
+
 
 #endif
