@@ -2,7 +2,6 @@
 #include <vector>
 #include <thread>
 #include <chrono>
-//#include <boost/algorithm/string.hpp>
 #include <cmath>
 #include <iomanip>
 
@@ -108,15 +107,11 @@ getEnergyReadings()
 	char* energy_stat_check = EnergyStatCheck();
 	string ener_info_string(energy_stat_check);
 	free(energy_stat_check);
-	//cout << ener_info_string << endl;
 	vector<string> ener_info_split = split(ener_info_string, '#');
+	
 	vector<double> ener_info;
 	for (string info : ener_info_split)
 	{
-		//char end = '\0';
-		//char* pend = &end;
-		//float d = strtof(info.c_str(),&pend);
-		//cout << info << "/" << d << endl;
 		ener_info.push_back(stod(info));
 	}
 	return ener_info;
@@ -138,10 +133,8 @@ void printEnergySamples(int iter, int delay)
 
 int main(int argc, char *argv[])
 {
-//	cout << setprecision(16) << atof(argv[1]) << endl;
-
 	ProfileInit();
 	printEnergySamples(10,10);
 	ProfileDealloc();
 	return 0;
-};
+}
