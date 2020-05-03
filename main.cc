@@ -20,7 +20,6 @@ using namespace std;
 //stod, atof, etc. are not precise, but we need every decimal point provided in the string
 //assume "xxxxx.xxxxx" string passed in
 
-
 struct EnergyArrays{
 	int n;
 	double *dram;
@@ -169,10 +168,40 @@ struct stamp{
 
 };
 
+class Stamp{
+	public:
+	std::chrono::time_point<std::chrono::high_resolution_clock> time;
+	std::vector<double> energy_reading;
 
+	Stamp(){
+		time = std::chrono::high_resolution_clock::now();
+		energy_reading = getEnergyReadings();
+	}
+
+	~Stamp(){
+
+	}
+
+	Stamp(const Stamp &old){
+		time = old.time;
+		energy_reading = old.energy_reading;
+	}
+	
+	Stamp
+	getDifference(Stamp start){
+		Stamp difference;
+		difference.time = time - start.time;
+		difference.energy_reading = energy_reading - start.energy_reading;
+		return difference;
+		 
+	}
+};
+	
 
 int main(int argc, char *argv[])
 {
+	Stamp start;
+
 	ProfileInit();
 	//auto e = getEnergySamples(100000,2);
 	//e->printArrays();
@@ -182,5 +211,12 @@ int main(int argc, char *argv[])
 	cout << a[0] << "\t" << a[1] << "\t" << a[2] << "\t" << a[3] << "\t" << a[4];
 	//delete e;
 	ProfileDealloc();
+
+	Stamp end;
+
+	Stamp difference = end.get_difference(start);
+	std::cout << "time " << difference.time << std::endl;
+	std::cout << "energy " << difference.energy_reading << std::endl;
+	
 	return 0;
 }

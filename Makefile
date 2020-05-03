@@ -1,10 +1,11 @@
 CXXFILES = main.cc #and also the one(s) that define(s) the sorting algorithms
+CXXFLAGS = -std=c++11
 TARGET = main
 
 all: $(TARGET) .gitignore
 
 $(TARGET): $(CXXFILES)
-	g++ $(CXXFILES) -L./RAPL-Library -lCPUScaler -o $@
+	g++ $(CXXFLAGS) $(CXXFILES) -L./RAPL-Library -lCPUScaler -o $@
 
 .gitignore: $(CXXFILES)
 	cat </dev/null >$@
