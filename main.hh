@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #include <iostream>
 #include <vector>
 #include <thread>
@@ -10,6 +9,8 @@
 #include "algorithms/mergeSort.hh"
 #include "algorithms/heapSort.hh"
 #include "algorithms/quickSort.hh"
+#include "algorithms/sorts.hh"
+
 
 extern "C"
 {
@@ -20,6 +21,7 @@ using namespace std;
 
 //stod, atof, etc. are not precise, but we need every decimal point provided in the string
 //assume "xxxxx.xxxxx" string passed in
+
 
 struct EnergyArrays{
 	int n;
@@ -39,67 +41,10 @@ struct EnergyArrays{
 
 	void printArrays(){
 		for(int i = 0; i < n; i++){
-			cout << setprecision(20) << "DRAM: " << dram[i] << "  PACKAGE: " << package[i] << "  CORE: " << core[i] << std::endl;
+			std::cout << setprecision(20) << "DRAM: " << dram[i] << "  PACKAGE: " << package[i] << "  CORE: " << core[i] << std::endl;
 		}
 	}
 };
-
-static long double precise_stod(string str)
-{
-	int num_pre_radixpt = str.find(".");
-	int num_post_radixpt;
-	if (num_pre_radixpt == -1) 
-	{
-		num_pre_radixpt = str.size();
-		num_post_radixpt = 0;
-	}
-	else
-	{ 
-		num_post_radixpt = str.size()-1-num_pre_radixpt;
-	}
-	//cout << num_pre_radixpt << " / " << num_post_radixpt << endl;
-
-	int power = num_pre_radixpt-1;
-	long double multiplier = pow(10,power);
-	long double result = 0;
-	
-	int i = 0;
-	while(str[i] != '.')
-	{
-		long double added = (str[i]-'0') * multiplier;
-		cout << "added: " << added << endl;
-		result += added;
-		power--;
-		multiplier = pow(10, power);
-		//cout << "1multiplier: " << multiplier << endl;
-		i++;
-	}	
-
-	i++;
-	power = 1;
-	multiplier = .1;
-
-	while(i < str.size())
-	{
-		long double added = (str[i]-'0') * multiplier; 
-		cout << "added: " << added << endl;
-		result += added;
-		power++;
-		multiplier = 1 / pow(10, power);
-		//cout << "2multiplier: " << multiplier << endl;
-		i++;
-	}
-
-	/*for (int i = 0; i < str.size(); i++)
-	{
-		if (str[i] == '.') continue;
-		result += (str[i]-'0') * multiplier;
-		power--;
-		multiplier = pow(10,power);
-	}*/
-
-	return result;
-}
 
 // Split by delimiter, pass by valuse because it destroys the string
 static vector<string> split(string line, char delim)
@@ -139,7 +84,7 @@ getEnergyReadings()
 	free(energy_stat_check);
 	vector<string> ener_info_split = split(ener_info_string, '#');
 	
-	vector<double> ener_info;
+	vector<double> ener_info;	
 	for (string info : ener_info_split)
 	{
 		ener_info.push_back(stod(info));
@@ -161,29 +106,41 @@ EnergyArrays* getEnergySamples(int iter, int delay)
 		e->package[i]  = after[2] - before[2];
 	}
 	return e;
-}	
+}
 
-int main(int argc, char *argv[])
-{
-	Stamp start;
 
-	ProfileInit();
-	//auto e = getEnergySamples(100000,2);
-	//e->printArrays();
-	void (*fns[])(double[],int ) = {bubbleSort, insertionSort, mergeSort, mergeSortOpt, quickSort, quickSort_optimized};
+struct stamp{
+	vector<double> energy;
+	
+};
 
-	auto fnNames = {"Bubble Sort", "Insertion Sort", "Merge Sort", "Optimized Mergesort", "Quicksort", "Quicksort Optimized"};
-	for(const char* name : fnNames){
-		std::cout << name << std::endl;
+class Stamp{
+	public:
+	std::chrono::time_point<std::chrono::high_resolution_clock> time;
+	std::vector<double> energy_reading;
+
+	Stamp(){
+		time = std::chrono::high_resolution_clock::now();
+		energy_reading = getEnergyReadings();
+	}
+
+	~Stamp(){
+
+	}
+
+	Stamp(const Stamp &old){
+		time = old.time;
+		energy_reading = old.energy_reading;
 	}
 	
-	ProfileDealloc();
+	Stamp
+	getDifference(Stamp start){
+		Stamp difference;
+		difference.time = time - start.time;
+		difference.energy_reading = energy_reading - start.energy_reading;
+		return difference;
+		 
+	}
+};
 
-	Stamp end;
 
-	Stamp difference = end.get_difference(start);
-	std::cout << "time " << difference.time << std::endl;
-	std::cout << "energy " << difference.energy_reading << std::endl;
-	
-	return 0;
-}
