@@ -4,6 +4,12 @@ This application measures the runtime and energy consumption of sorting algorith
 
 ## Sorting algorithms analyzed
 @TODO list...
++ Bubble Sort
++ Insertion Sort
++ Merge Sort
++ Merge Sort Optimized
++ Quicksort
++ Quicksort Optimized
 
 ## How are we measuring energy consumption?
 The RAPL library, implemented in C, is adapted from an independent research project that Rutvik and Alejandro are working on for Professor Yu David Liu. @TODO: link to the jRAPL repo
