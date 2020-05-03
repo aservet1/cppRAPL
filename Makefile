@@ -1,4 +1,4 @@
-CXXFILES = main.cpp #and also the one(s) that define(s) the sorting algorithms
+CXXFILES = main.cc #and also the one(s) that define(s) the sorting algorithms
 TARGET = main
 
 all: $(TARGET) .gitignore
