@@ -4,6 +4,11 @@
 #include <chrono>
 #include <cmath>
 #include <iomanip>
+#include <cstdlib>
+#include <ctime>
+#include "algorithms/mergeSort.hh"
+#include "algorithms/heapSort.hh"
+#include "algorithms/quickSort.hh"
 
 extern "C"
 {
@@ -14,6 +19,31 @@ using namespace std;
 
 //stod, atof, etc. are not precise, but we need every decimal point provided in the string
 //assume "xxxxx.xxxxx" string passed in
+
+
+struct EnergyArrays{
+	int n;
+	double *dram;
+	double *package;
+	double *core;
+	EnergyArrays(int n): n(n){
+		dram = new double[n];
+		package = new double[n];
+		core = new double[n];
+	}
+	~EnergyArrays(){
+		delete[] dram;
+		delete[] package;
+		delete[] core;
+	}
+
+	void printArrays(){
+		for(int i = 0; i < n; i++){
+			cout << setprecision(20) << "DRAM: " << dram[i] << "  PACKAGE: " << package[i] << "  CORE: " << core[i] << std::endl;
+		}
+	}
+};
+
 static long double precise_stod(string str)
 {
 	int num_pre_radixpt = str.find(".");
@@ -117,24 +147,40 @@ getEnergyReadings()
 	return ener_info;
 }
 
-void printEnergySamples(int iter, int delay)
+EnergyArrays* getEnergySamples(int iter, int delay)
 {
+	EnergyArrays *e = new EnergyArrays(iter);
+	srand(rand());
 	for (int i = 0; i < iter; i++)
 	{
 		vector<double> before = getEnergyReadings();
-		this_thread::sleep_for(chrono::seconds(delay));
+		this_thread::sleep_for(chrono::milliseconds(delay * (rand() % 3 + 1)));
 		vector<double> after  = getEnergyReadings();
-		double dram = after[0] - before[0];
-		double cpu  = after[1] - before[1];
-		double pkg  = after[2] - before[2];
-		cout << "dram:\t" << setprecision(20) << dram << "\tcpu:\t" << setprecision(20) << cpu << "\tpkg:\t" << setprecision(20) << pkg << endl;
+		e->dram[i] = after[0] - before[0];
+		e->core[i]  = after[1] - before[1];
+		e->package[i]  = after[2] - before[2];
 	}
+	return e;
 }
+
+
+struct stamp{
+	vector<double> energy;
+
+};
+
+
 
 int main(int argc, char *argv[])
 {
 	ProfileInit();
-	printEnergySamples(10,10);
+	//auto e = getEnergySamples(100000,2);
+	//e->printArrays();
+
+	int a[] = {5, 4, 3, 2, 1};
+	quickSort(a, 5);
+	cout << a[0] << "\t" << a[1] << "\t" << a[2] << "\t" << a[3] << "\t" << a[4];
+	//delete e;
 	ProfileDealloc();
 	return 0;
 }
