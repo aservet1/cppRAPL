@@ -4,7 +4,7 @@ TARGET = main
 all: $(TARGET) .gitignore
 
 $(TARGET): $(CXXFILES)
-	g++ $(CXXFILES) -L./RAPL-Library -lCPUScaler -o $@
+	g++ $(CXXFILES) -L./RAPL-Library -lCPUScaler main.hh -o $@
 
 .gitignore: $(CXXFILES)
 	cat </dev/null >$@
