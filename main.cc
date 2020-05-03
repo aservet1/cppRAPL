@@ -6,6 +6,9 @@
 #include <iomanip>
 #include <cstdlib>
 #include <ctime>
+#include "algorithms/mergeSort.hh"
+#include "algorithms/heapSort.hh"
+#include "algorithms/quickSort.hh"
 
 extern "C"
 {
@@ -161,14 +164,23 @@ EnergyArrays* getEnergySamples(int iter, int delay)
 }
 
 
+struct stamp{
+	vector<double> energy;
+
+};
+
 
 
 int main(int argc, char *argv[])
 {
 	ProfileInit();
-	auto e = getEnergySamples(10000,2);
-	e->printArrays();
-	delete e;
+	//auto e = getEnergySamples(100000,2);
+	//e->printArrays();
+
+	int a[] = {5, 4, 3, 2, 1};
+	quickSort(a, 5);
+	cout << a[0] << "\t" << a[1] << "\t" << a[2] << "\t" << a[3] << "\t" << a[4];
+	//delete e;
 	ProfileDealloc();
 	return 0;
 }
