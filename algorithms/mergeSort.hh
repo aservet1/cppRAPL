@@ -1,5 +1,5 @@
 #ifndef MERGE_SORT_HH
-	#define MERGE_SORT_HH
+#define MERGE_SORT_HH
 
 #include <iostream>
 
@@ -9,6 +9,10 @@
 
 #include "sorts.hh"
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 7abfb776f8311b3b97aceeb110006405ca0d435b
 //.beginMSort
 //sort a[lo, hi) using temp[] as temporary storage
 template <typename E>
