@@ -3,9 +3,16 @@
 
 const int THRESHOLD = 10;
 
+<<<<<<< HEAD
 template <typename E>
 static void swap(E a[], int i, int j){
   E t = a[i];
+=======
+static void
+swap(int a[], int i, int j)
+{
+  int t = a[i];
+>>>>>>> 7abfb776f8311b3b97aceeb110006405ca0d435b
   a[i] = a[j];
   a[j] = t;
 }
