@@ -9,8 +9,6 @@
 
 #include "sorts.hh"
 
-const int THRESHOLD = 10;
-
 //.beginMSort
 //sort a[lo, hi) using temp[] as temporary storage
 template <typename E>
