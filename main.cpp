@@ -2,8 +2,8 @@
 #include <vector>
 #include <thread>
 #include <chrono>
-//#include <boost/algorithm/string.hpp>
 #include <cmath>
+#include <iomanip>
 
 extern "C"
 {
@@ -36,10 +36,12 @@ static long double precise_stod(string str)
 	int i = 0;
 	while(str[i] != '.')
 	{
-		result += (str[i]-'0') * multiplier;
+		long double added = (str[i]-'0') * multiplier;
+		cout << "added: " << added << endl;
+		result += added;
 		power--;
 		multiplier = pow(10, power);
-		cout << "1multiplier: " << multiplier << endl;
+		//cout << "1multiplier: " << multiplier << endl;
 		i++;
 	}	
 
@@ -49,10 +51,12 @@ static long double precise_stod(string str)
 
 	while(i < str.size())
 	{
-		result += (str[i]-'0') * multiplier;
+		long double added = (str[i]-'0') * multiplier; 
+		cout << "added: " << added << endl;
+		result += added;
 		power++;
 		multiplier = 1 / pow(10, power);
-		cout << "2multiplier: " << multiplier << endl;
+		//cout << "2multiplier: " << multiplier << endl;
 		i++;
 	}
 
@@ -103,15 +107,11 @@ getEnergyReadings()
 	char* energy_stat_check = EnergyStatCheck();
 	string ener_info_string(energy_stat_check);
 	free(energy_stat_check);
-	cout << ener_info_string << endl;
 	vector<string> ener_info_split = split(ener_info_string, '#');
+	
 	vector<double> ener_info;
 	for (string info : ener_info_split)
 	{
-		//char end = '\0';
-		//char* pend = &end;
-		//float d = strtof(info.c_str(),&pend);
-		//cout << info << "/" << d << endl;
 		ener_info.push_back(stod(info));
 	}
 	return ener_info;
@@ -124,19 +124,17 @@ void printEnergySamples(int iter, int delay)
 		vector<double> before = getEnergyReadings();
 		this_thread::sleep_for(chrono::seconds(delay));
 		vector<double> after  = getEnergyReadings();
-		int dram = before[0] - after[0];
-		int cpu  = before[1] - after[1];
-		int pkg  = before[2] - after[2];
-		cout << "dram:\t" << dram << "\tcpu:\t" << cpu << "\tpkg:\t" << pkg << endl;
+		double dram = after[0] - before[0];
+		double cpu  = after[1] - before[1];
+		double pkg  = after[2] - before[2];
+		cout << "dram:\t" << setprecision(20) << dram << "\tcpu:\t" << setprecision(20) << cpu << "\tpkg:\t" << setprecision(20) << pkg << endl;
 	}
 }
 
 int main(int argc, char *argv[])
 {
-	cout << (long double)precise_stod(argv[1]) << endl;
-
-//	ProfileInit();
-//	printEnergySamples(10,1);
-//	ProfileDealloc();
+	ProfileInit();
+	printEnergySamples(10,10);
+	ProfileDealloc();
 	return 0;
-};
+}
