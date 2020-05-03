@@ -1,6 +1,8 @@
 #ifndef INSERTION_SORT_HH
 	#define INSERTION_SORT_HH
 
+const int THRESHOLD = 10;
+
 static void
 swap(int a[], int i, int j)
 {
