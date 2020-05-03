@@ -108,20 +108,26 @@ EnergyArrays* getEnergySamples(int iter, int delay)
 	return e;
 }
 
-
-struct stamp{
-	vector<double> energy;
-	
-};
+template <typename E>
+void
+printVector(std::vector<E> vec){
+	std::ostream& out = std::cout;
+	out.precision(15);
+	auto it = vec.cbegin();
+	for(; it != vec.cend(); it++){
+		std::cout << fixed << *it << " ";
+	}
+	std::cout << endl;
+}
 
 class Stamp{
 	public:
-	std::chrono::time_point<std::chrono::high_resolution_clock> time;
-	std::vector<double> energy_reading;
+	std::chrono::steady_clock::time_point time;
+	std::vector<double> energy;
 
 	Stamp(){
-		time = std::chrono::high_resolution_clock::now();
-		energy_reading = getEnergyReadings();
+		time = std::chrono::steady_clock::now();
+		energy = getEnergyReadings();
 	}
 
 	~Stamp(){
@@ -130,16 +136,25 @@ class Stamp{
 
 	Stamp(const Stamp &old){
 		time = old.time;
-		energy_reading = old.energy_reading;
+		energy = old.energy;
 	}
 	
-	Stamp
-	getDifference(Stamp start){
-		Stamp difference;
-		difference.time = time - start.time;
-		difference.energy_reading = energy_reading - start.energy_reading;
-		return difference;
+	double
+	timeDifference(Stamp start){
+		return std::chrono::duration_cast<std::chrono::milliseconds>(time - start.time).count();
 		 
+	}
+	
+	std::vector<double>
+	energyDifference(Stamp start){
+		auto i1 = start.energy.cbegin();
+		auto i2 = energy.cbegin();
+		std::vector<double> energy_difference;
+		for(; (i1 != start.energy.cend()) && (i2 != energy.cend()) ; i1++, i2++ ){
+			double difference = *i2 - *i1;
+			energy_difference.push_back(difference);
+		}
+		return energy_difference;
 	}
 };
 
