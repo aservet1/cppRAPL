@@ -9,14 +9,14 @@ extern "C"
 using namespace std;
 
 /**	The C side function mallocs a char*, so this function turns
-	it into an std::string and frees the C program's .alloc
+	it into an std::string and frees the C program's malloc
 */
 static string
 getEnergyStatString()
 {
 	char* rapl_energy_info = EnergyStatCheck();
 	string rapl_energy_info_string(rapl_energy_info);
-	free(rapl_energy_info); //@TODO -- this doesn't actually free
+	free(rapl_energy_info);
 	return rapl_energy_info_string;
 }
 

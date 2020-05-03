@@ -7,8 +7,8 @@ $(TARGET): $(CXXFILES)
 	g++ $(CXXFILES) -L./RAPL-Library -lCPUScaler -o $@
 
 .gitignore: $(CXXFILES)
-	cat </dev/null >@
-	for t in $(TARGET); do echo $$t >>@; done
+	cat </dev/null >$@
+	for t in $(TARGET); do echo $$t >>$@; done
 
 clean:
 	rm -f $(TARGET)
