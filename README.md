@@ -11,7 +11,7 @@ The RAPL library, implemented in C, is adapted from an independent research proj
 RAPL stands for Running Average Power Limit, a way of monitoring and controlling a computer's energy levels. It works on Intel processors by reading and writing the Model Specific Registers (MSRs). In this project, we only directly access one function from the library, EnergyStatCheck(), which returns total energy consumption. We call the function before and after running our sorting algorithms and take the difference in readings.
 EnergyStatCheck() returns energy readings for three different power domains: DRAM, CPU, and Package. Package is the entire CPU socket. Our algorithms will therefore be measured with respect to energy consumption in each of these three power domains.
    ##### System requirements
-    The energy reading utility currently only works for Intel processors on Linux systems. Root access required to access energy readings
+   The energy reading utility currently only works for Intel processors on Linux systems. Root access required to access energy readings
 
 ## How are we measuring runtime?
 Using std::chrono we can timestamp before and after a function runs and take the difference to measure the elapsed time.
