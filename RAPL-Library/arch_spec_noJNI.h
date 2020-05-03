@@ -53,30 +53,6 @@ typedef struct cpuid_info_t {
 #define READ_FROM_DRAM 1 // Used in the switch case statements in CPUScler.c to identify if the cpu model reads from DRAM buffer
 #define READ_FROM_GPU 2 // Used in the switch case statements in CPUScler.c to identify if the cpu model reads from the GPU buffer
 
-/* None of these are global variables any more
-extern uint32_t eax, ebx, ecx, edx;
-extern uint32_t cpu_model;
-
-int read_time = 0;
-uint64_t max_pkg = 0;
-uint64_t num_core_thread = 0; //number of physical threads per core
-uint64_t num_pkg_thread = 0; //number of physical threads per package
-uint64_t num_pkg_core = 0; //number of cores per package
-uint64_t num_pkg = 0; //number of packages for current machine
-
-
-extern int core;
-
-extern int read_time;
-extern uint64_t max_pkg;
-extern uint64_t num_core_thread; //number of physical threads per core
-extern uint64_t num_pkg_thread; //number of physical threads per package
-extern uint64_t num_pkg_core; //number of cores per package
-extern uint64_t num_pkg; //number of packages for current machine
-
-extern int coreNum;
-*/
-
 uint32_t
 get_cpu_model(void);
 

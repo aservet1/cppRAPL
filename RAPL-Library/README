@@ -1,0 +1,2 @@
+The makefile in here makes a shared library that we will ultimately use
+to access the EnergyStatCheck library to get energy readings

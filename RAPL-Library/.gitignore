@@ -1,0 +1,1 @@
+libCPUScaler.a CPUScaler_noJNI.o arch_spec_noJNI.o msr_noJNI.o

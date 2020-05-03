@@ -117,12 +117,6 @@ typedef struct rapl_msr_power_limit_t {
 	uint64_t lock_enable;
 } rapl_msr_power_limit_t;
 
-////deglobalized(?)
-/*extern char *ener_info;
-extern rapl_msr_unit rapl_unit;
-extern int *fd;
-extern rapl_msr_parameter *parameters;*/
-
 
 typedef enum {
 	MINIMUM_POWER_LIMIT = 0,
@@ -135,6 +129,7 @@ typedef enum {
 	MAXIMUM_TIME_WINDOW,
 	COSTOM_TIME_WINDOW
 } msr_time_window_set;
+
 #define _2POW(e)	\
 ((e == 0) ? 1 : (2 << (e - 1)))
 
