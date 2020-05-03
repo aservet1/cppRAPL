@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #include <iostream>
 #include <vector>
 #include <thread>
@@ -10,6 +9,7 @@
 #include "algorithms/mergeSort.hh"
 #include "algorithms/heapSort.hh"
 #include "algorithms/quickSort.hh"
+#include "main.hh"
 
 extern "C"
 {
