@@ -17,9 +17,6 @@ extern "C"
 
 using namespace std;
 
-//stod, atof, etc. are not precise, but we need every decimal point provided in the string
-//assume "xxxxx.xxxxx" string passed in
-
 
 struct EnergyArrays{
 	int n;
@@ -44,6 +41,8 @@ struct EnergyArrays{
 	}
 };
 
+//stod, atof, etc. are not precise, but we need every decimal point provided in the string
+//assume "xxxxx.xxxxx" string passed in
 static long double precise_stod(string str)
 {
 	int num_pre_radixpt = str.find(".");
