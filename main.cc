@@ -8,10 +8,7 @@ int main(int argc, char *argv[])
 	void (*fns[])(double[],int ) = {bubbleSort, insertionSort, mergeSort, mergeSortOpt, quickSort, quickSort_optimized};
 	auto fnNames = {"Bubble Sort", "Insertion Sort", "Merge Sort", "Optimized Mergesort", "Quicksort", "Quicksort Optimized"};
 	
-	for(auto fn : fns){
-		fn()
-	}
-
+	
 	ProfileDealloc();
 	return 0;
 }
