@@ -1,6 +1,7 @@
 CXXFILES = main.cc #and also the one(s) that define(s) the sorting algorithms
 CXXFLAGS = -std=c++11
 TARGET = main
+RAPL_LIBRARY = RAPL-Library/libCPUScaler.a
 
 all: $(TARGET) .gitignore
 
