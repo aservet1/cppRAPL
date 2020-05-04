@@ -48,21 +48,3 @@ void countingSort(double arr[], int length)
 		}
 	}
 }
-
-/*void print(double d[], int length)
-{
-	std::cout << "{ ";
-	for (int i = 0; i < length-1; i++)
-		std::cout << d[i] << ", ";
-	std::cout << d[length-1] << " }" << std::endl;
-}
-
-int main(int argc, char *argv[])
-{
-	std::cout << precision(5) << std::endl;
-	double d[] = {9.5, 8.3, 74.2, 0.33298742348723, 42.0};
-	int length = 5;
-	counting_sort(d, length);
-	print(d, length);
-	return 0;
-}*/
