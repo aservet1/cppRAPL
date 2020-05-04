@@ -24,7 +24,7 @@ double unhash(int i)
 	return d/precision(5);
 }
 
-void counting_sort(double arr[], int length)
+void countingSort(double arr[], int length)
 {
 	double max = find_max(arr, length);
 	int buckets_length = hash(max) + 1;
