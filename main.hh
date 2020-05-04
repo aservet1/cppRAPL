@@ -141,7 +141,7 @@ class Stamp{
 	
 	double
 	timeDifference(Stamp start){
-		return std::chrono::duration_cast<std::chrono::milliseconds>(time - start.time).count();
+		return std::chrono::duration_cast<std::chrono::microseconds>(time - start.time).count();
 		 
 	}
 	
