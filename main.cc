@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 {
 	ProfileInit();
 
-	void (*fns[])(double[],int ) = {/*bogoSort,*/ bubbleSort, insertionSort /*countingSort*/, mergeSort, mergeSortOpt, quickSort, quickSort_optimized};
+	void (*fns[])(double[],int ) = {/*bogoSort,*/ bubbleSort, insertionSort, countingSort, mergeSort, mergeSortOpt, quickSort, quickSortOpt};
 
 	const char *fnNames[] = {/*"Bogo Sort",*/ "Bubble Sort", "Insertion Sort" /*"Counting Sort"*/, "Merge Sort", "Optimized Mergesort", "Quicksort", "Optimized Quicksort"};
 	
