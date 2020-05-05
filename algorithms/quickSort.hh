@@ -3,11 +3,6 @@
 #ifndef QUICK_SORT_HH
 #define QUICK_SORT_HH
 
-template <typename E>
-static int findPivot(E a[], int i, int j){
-  return (i+j)/2;
-}
-
 
 template <typename E>
 static int partition(E a[], int lo, int hi){
