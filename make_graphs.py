@@ -20,9 +20,10 @@ for key in info.keys():
 energy_plot1 = plt.figure()
 dram_plot = energy_plot1.add_subplot(111)
 energy_plot2 = plt.figure()
-core_plot = energy_plot2.add_subplot(132)
+core_plot = energy_plot2.add_subplot(111)
 energy_plot3 = plt.figure()
-package_plot = energy_plot3.add_subplot(133)
+package_plot = energy_plot3.add_subplot(111)
+
 time_plot = plt.figure()
 ax2 = time_plot.add_subplot(111)
 
@@ -69,5 +70,7 @@ ax2.set_ylabel("Time (ms)")
 #ax2.set_yscale('log')
 ax2.legend()
 
-energy_plot.savefig("energy_plot")
+energy_plot1.savefig("dram_plot")
+energy_plot2.savefig("core_plot")
+energy_plot3.savefig("package_plot")
 time_plot.savefig("time_plot")
