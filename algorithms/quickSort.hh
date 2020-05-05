@@ -9,24 +9,25 @@ static int findPivot(E a[], int i, int j){
 }
 
 template <typename E>
-static int partition(E a[], int lo, int hi, int pivot){
-  while (lo <= hi){
-    while (a[lo] < pivot) ++lo;
-    while ((hi >= lo) && (a[hi] >= pivot)) --hi;
-    if (hi > lo) swap(a, lo, hi);
-  }
-  return lo;
+static int partition(E a[], int lo, int hi){
+  E pivot = a[hi];
+	int pIndex = lo;
+	for (int i = lo; i < hi; i++)
+	{
+		if (a[i] <= pivot) swap(a, i, pIndex++);
+	}
+	swap (a, pIndex, hi);
+	
+	return pIndex;
 }
 
 template <typename E>
 static void qsort(E a[], int lo, int hi){
-  if (hi - lo < 1) return;
-  int pivotindex = findPivot(a, lo, hi);
-  swap(a, pivotindex, hi);
-  int k = partition(a, lo, hi-1, a[hi]);
-  swap(a, k, hi);
-  qsort(a, lo, k - 1);
-  qsort(a, k + 1, hi);
+  if(lo >= hi)
+		return;
+	int pivot = partition(a, lo, hi);
+	qsort(a, lo, pivot - 1);
+	qsort(a, pivot + 1, hi);
 }
 
 template <typename E>
@@ -36,20 +37,32 @@ void quickSort(E a[], int n){
 
 template <typename E>
 static void qsort_optimized(E a[], int lo, int hi){
-  if (hi - lo + 1<= THRESHOLD){
-    insertionSort(&a[lo], hi - lo + 1);
-    break;
-  }
-  int pivotindex = findPivot(a, lo, hi);
-  swap(a, pivotindex, hi);
-  int k = partition(a, lo, hi-1, a[hi]);
-  swap(a, k, hi);
-  qsort_optimized(a, lo, k - 1);
-  qsort_optimized(a, k + 1, hi);
+  while (lo < hi) 
+	{
+		// do insertion sort if 10 or smaller
+		if(hi - lo < 10)
+		{
+			insertionSort(a, lo, hi);
+			break;
+		}
+		else 
+		{
+			int pivot = partition(a, lo, hi);
+			
+			// tail call optimizations - recur on smaller sub-array
+			if (pivot - lo < hi - pivot) {
+				qsort_optimized(a, lo, pivot - 1);
+				lo = pivot + 1;
+			} else {
+				qsort_optimized(a, pivot + 1, hi);
+				hi = pivot - 1;
+			}
+		}
+	}	
 }
 
 template <typename E>
-void quickSort_optimized(E a[], int n){
+void quickSortOpt(E a[], int n){
   qsort_optimized(a, 0, n - 1);
 }
 

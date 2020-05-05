@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
 
 	void (*fns[])(double[],int ) = {/*bogoSort,*/ bubbleSort, insertionSort /*countingSort*/, mergeSort, mergeSortOpt, quickSort, quickSort_optimized};
 
-		const char *fnNames[] = {/*"Bogo Sort",*/ "Bubble Sort", "Insertion Sort" /*"Counting Sort"*/, "Merge Sort", "Optimized Mergesort", "Quicksort", "Optimized Quicksort"};
+	const char *fnNames[] = {/*"Bogo Sort",*/ "Bubble Sort", "Insertion Sort" /*"Counting Sort"*/, "Merge Sort", "Optimized Mergesort", "Quicksort", "Optimized Quicksort"};
 	
 	std::cout << "len of names " << sizeof(fnNames)/sizeof(char*) << std::endl;
 
@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
 			//printVector(energy_diff);
 		}
 		delete[] copy;
-		delete[] data;
+		delete[] data;	
 		//delete arrays;
 	}
 
