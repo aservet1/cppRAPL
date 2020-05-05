@@ -13,16 +13,6 @@
 
 #define DELAY 2
 
-<<<<<<< HEAD
-=======
-void genRandomArray(double *arr, int size){
-  srand(time(0));
-  for(int i = 0 ; i < size; i++){
-    arr[i] = (rand()%100000)/100000;
-  }
-}
->>>>>>> 9d4b46c1c33eb54f47c037c7a5c59cdc2875e34d
-
 int main(int argc, char *argv[]){
   ProfileInit();
 
