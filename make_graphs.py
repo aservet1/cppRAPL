@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 info = defaultdict(list)
 
 for file in listdir():
-    if file.endswith("out.data"):
+    if file.endswith("bogoOutput.data"):
         with open(file) as fh:
             for line in fh:
                 words = line.split()
@@ -52,10 +52,10 @@ for key in info.keys():
         packages.append(value[2][1])
         cores.append(value[2][2])
         if(value[1] != 0):
-            nonzerolens.append(value[1])
-            ppowers.append(value[2][1] / value[1])
-            cpowers.append(value[2][2] / value[1])
-            dpowers.append(value[2][0] / value[1])
+            nonzerolens.append(value[0])
+            ppowers.append((value[2][1] * 1000) / value[1])
+            cpowers.append((value[2][1] * 1000) / value[1])
+            dpowers.append((value[2][1] * 1000) / value[1])
         else:
             flag = True
     dram_plot.plot(lengths, drams, label = key)
@@ -107,14 +107,15 @@ package_plot.legend()
 
 ax2.set_xlabel("Array length (n)")
 ax2.set_ylabel("Time (ms)")
+ax2.set_title("Time performance plot")
 #ax2.set_yscale('log')
 ax2.legend()
+sort = "bogo_"
 
-
-power_plot1.savefig("dram_power_plot")
-power_plot2.savefig("core_power_plot")
-power_plot3.savefig("package_power_plot")
-energy_plot1.savefig("dram_plot")
-energy_plot2.savefig("core_plot")
-energy_plot3.savefig("package_plot")
-time_plot.savefig("time_plot")
+power_plot1.savefig(sort+"dram_power_plot")
+power_plot2.savefig(sort+"core_power_plot")
+power_plot3.savefig(sort+"package_power_plot")
+energy_plot1.savefig(sort+"dram_plot")
+energy_plot2.savefig(sort+"core_plot")
+energy_plot3.savefig(sort+"package_plot")
+time_plot.savefig(sort+"time_plot")
