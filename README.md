@@ -36,6 +36,7 @@ All of this is done in a function <code>measureFunctionPerformance()</code>, whi
 All output is redirected to a .data file, which we parse and analyze with a Python script using matplotlib.
 
 ## Graphing results
-Our graphs show the expected results. Bubble sort and insertion sort are the worse performing algorithms. Merge sort,    ,  all perform comparably with O(nlogn). 
+Our graphs show the expected results. Bubble sort and insertion sort have quadratic performance. Merge sort, Merge sort optimized, Quick sort and Heap sort, all have logarithmic performance. Bogosort is...surprisingly acceptable for sizes of N less than 6, but quickly spirals out of proportion, as we stopped gathering data for sizes of N larger than 12.
+
 There is a clear correlation between run time and energy consumption. This is to be expected, and there are no unexpected differences between the metrics. The run time and energy consumption graphs grow at the same time.
 We have used the python script to plot the results after writing the readings to a text file.
