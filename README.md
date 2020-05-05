@@ -23,10 +23,13 @@ EnergyStatCheck() returns energy readings for three different power domains: DRA
 
 ## How are we measuring runtime?
 Using std::chrono we can timestamp before and after a function runs and take the difference to measure the elapsed time.
-To facilitate reading runtime and power consumption, we have class Stamp to take both measurements. A stamp object is created at the beggining and end of readings. In this case it is done before and after the algorithms are run. When the objects are created, they store the current clock time using std::chrono and power consumption using the RAPL library. Member functions are used to return the time or power difference between two Stamp objects.
 
 ## Performance analysis implementation
-Our sorting algorithms are accessed in an array of function pointers. We iterate through pass each algorithm into a performance analysis function @TODO what's it called?
-The performance analysis function ........
+To facilitate reading runtime and power consumption, we have class Stamp to take both measurements. A stamp object is created at the beggining and end of readings. In this case it is done before and after the algorithms are run. When the objects are created, they store the current clock time using std::chrono and power consumption using the RAPL library. Member functions are used to return the time or power difference between two Stamp objects. 
+
+All of the sorting algorithms analyzed are accessed from an array of function pointers. We iterate through each function and use it to sort an array of data. After each iteration of sorting the array, a larger array is used to gather data for larger values of N. We use the stamp class to measure the time and power consumption before and after the sorting. We can then graph the difference for each algorithm at different values of array size N.
+@TODO The performance analysis function ........
 
 ## Graphing results
+Our graphs show the expected results. Bubble sort and insertion sort are the worse performing algorithms. Merge sort,    ,  all perform comparably with O(nlogn). 
+There is a clear correlation between run time and power consumption. This is to be expected, and there are no unexpected differences between the metrics. The run time and power consumption graphs grow at the same time.
