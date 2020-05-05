@@ -2,6 +2,7 @@
 #define STAMP_HH
 
 #include <chrono>
+#include "energyReadings.hh"
 
 class Stamp{
   public:

@@ -1,52 +1,62 @@
-#include "main.hh"
+#include <cstdlib>
+#include <ctime>
+
 #include "algorithms/sorts.hh"
 #include "algorithms/mergeSort.hh"
 #include "algorithms/heapSort.hh"
 #include "algorithms/quickSort.hh"
 //#include "algorithms/countingSort.hh"
 //#include "algorithms/bogoSort.hh"
-#include <cstdlib>
-#include <ctime>
+#include "energyReadings.hh"
+#include "stamp.hh"
+#include "helperFunctions.hh"
 
 #define DELAY 2
 
+<<<<<<< HEAD
+=======
+void genRandomArray(double *arr, int size){
+  srand(time(0));
+  for(int i = 0 ; i < size; i++){
+    arr[i] = (rand()%100000)/100000;
+  }
+}
+>>>>>>> 9d4b46c1c33eb54f47c037c7a5c59cdc2875e34d
 
-int main(int argc, char *argv[])
-{
-	ProfileInit();
+int main(int argc, char *argv[]){
+  ProfileInit();
 
-	void (*fns[])(double[],int ) = {/*bogoSort,*/ bubbleSort, insertionSort, countingSort, mergeSort, mergeSortOpt, quickSort, quickSortOpt};
+  void (*fns[])(double[],int ) = {/*bogoSort,*/ bubbleSort, insertionSort, /*countingSort,*/ mergeSort, mergeSortOpt, quickSort, quickSortOpt, heapSort};
 
-	const char *fnNames[] = {/*"Bogo Sort",*/ "Bubble Sort", "Insertion Sort" /*"Counting Sort"*/, "Merge Sort", "Optimized Mergesort", "Quicksort", "Optimized Quicksort"};
+  const char *fnNames[] = {/*"Bogo Sort",*/ "Bubble Sort", "Insertion Sort" /*"Counting Sort"*/, "Merge Sort", "Optimized Mergesort", "Quicksort", "Optimized Quicksort", "Heap Sort"};
 	
-	std::cout << "len of names " << sizeof(fnNames)/sizeof(char*) << std::endl;
+  std::cout << "len of names " << sizeof(fnNames)/sizeof(char*) << std::endl;
 
-	int sizes[] = {10, 100, 1000, 10000, 1000000};
-	for(int size : sizes){
-		//EnergyArrays *arrays = getEnergySamples(size, DELAY);
-		double *data = new double[size];
-		genRandomArray(data, size);
-		double *copy = new double[size];
-		for(int i = 0; i < 6; i++){
-			if((i == 0 || i == 1) && size > 1000){
-				continue;
-			}
-			makeCopy(copy, data, size);
-			Stamp start;
-			fns[i](copy, size);
-			Stamp stop;
-			auto time_elapsed = stop.timeDifference(start) / 1000;
-			std::vector<double> energy_diff = stop.energyDifference(start);
-			std::cout << fnNames[i] << " " << size << " " << time_elapsed << " " << std::endl;
-			//printVector(energy_diff);
-		}
-		delete[] copy;
-		delete[] data;	
-		//delete arrays;
-	}
+  int sizes[] = {10, 100, 1000, 10000, 1000000};
+  for(int size : sizes){
+    //EnergyArrays *arrays = getEnergySamples(size, DELAY);
+    double *data = new double[size];
+    genRandomArray(data, size);
+    double *copy = new double[size];
+    for(int i = 0; i < 6; i++){
+      if((i == 0 || i == 1) && size > 1000){
+        continue;
+      }
+      makeCopy(copy, data, size);
+      Stamp start;
+      fns[i](copy, size);
+      Stamp stop;
+      auto time_elapsed = stop.timeDifference(start) / 1000;
+      std::vector<double> energy_diff = stop.energyDifference(start);
+      std::cout << fnNames[i] << " " << size << " " << time_elapsed << " " << std::endl;
+      //printVector(energy_diff);
+    }
+    delete[] copy;
+    delete[] data;
+    //delete arrays;
+  }
 
-	
-	ProfileDealloc();
+  ProfileDealloc();
 
-	return 0;
+  return 0;
 }
