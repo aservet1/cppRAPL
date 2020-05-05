@@ -5,7 +5,7 @@
 #include <cfloat>
 #include <cmath>
 
-#define precision(n) pow(10,n-1)
+#define flag(n) std::cout << "flag" << n << std::endl;
 
 template <typename E>
 static E findMax(E arr[], int length){
@@ -18,13 +18,12 @@ static E findMax(E arr[], int length){
 
 template <typename E>
 static int hash(E d){
-  return d*100000; //turn double into int
+  return d * 10000;
 }
 
 template <typename E>
-static E unhash(int i){
-  E d = (E)i;
-  return d/10000;
+static E unhash(E i){
+  return i / 10000;
 }
 
 template <typename E>
@@ -42,7 +41,7 @@ void countingSort(E arr[], int length){
   int arr_i = 0;
   for (int i = 0; i < buckets_length; i++){
     while (buckets[i] != 0){
-      arr[arr_i++] = unhash(i);
+      arr[arr_i++] = unhash((E)i);
       buckets[i] -= 1;
     }
   }
