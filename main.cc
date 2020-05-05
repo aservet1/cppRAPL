@@ -46,6 +46,11 @@ void measureFunctionPerformance(int numberOfSorts, void (*fns[])(double[],int), 
 }
 
 int main(int argc, char *argv[]){
+  if (argc < 2){
+    std::cout << "usage: sudo " << argv[0] << " outputfile.data" << std::endl;
+    exit(1);
+  }
+
   ProfileInit();
 
   int numberOfSorts = 8;
