@@ -6,6 +6,7 @@ This application measures the runtime and power consumption of sorting algorithm
 @TODO MAKE SURE THSE ARE THE SORTS WE ARE ACTUALLY USING
 + Bubble Sort
 + Insertion Sort
++ Selection Sort
 + Merge Sort
 + Merge Sort Optimized
 + Quicksort
