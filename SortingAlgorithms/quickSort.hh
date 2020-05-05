@@ -5,8 +5,8 @@
 #include "insertionSort.hh"
 
 
-static int
-findPivot(int a[], int i, int j)
+template <typename E>
+static int findPivot(E a[], int i, int j)
 {
   return (i+j)/2;
 }

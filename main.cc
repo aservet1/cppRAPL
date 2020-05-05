@@ -2,6 +2,7 @@
 #include <ctime>
 #include <iomanip>
 #include <iostream>
+#include <fstream>
 #include "SortingAlgorithms/sorts.hh"
 #include "SortingAlgorithms/mergeSort.hh"
 #include "SortingAlgorithms/heapSort.hh"
@@ -35,9 +36,8 @@ void measureFunctionPerformance(int numberOfSorts, void (*fns[])(double[],int), 
       if (fnNames[i] == "BOGO_Sort") time_elapsed = stop.timeDifference(start); // higher granularity because small sizes 1-5 go by really quick
       else time_elapsed = stop.timeDifference(start) / 1000000;
       std::vector<double> energy_diff = stop.energyDifference(start);
-      //std::cout << fnNames[i] << " " << size << std::setprecision(20) << " "  << time_elapsed << " " ;
       outfile << fnNames[i] << " " << size << std::setprecision(20) << " "  << time_elapsed << " " ;
-      printVector(energy_diff);
+      printVector(energy_diff, outfile);
     }
     delete[] copy;
     delete[] data;
@@ -46,17 +46,22 @@ void measureFunctionPerformance(int numberOfSorts, void (*fns[])(double[],int), 
 }
 
 int main(int argc, char *argv[]){
+  if (argc < 2){
+    std::cout << "usage: sudo " << argv[0] << " outputfile.data" << std::endl;
+    exit(1);
+  }
+
   ProfileInit();
 
-  int numberOfSorts = 7;
-  void (*fns[])(double[],int ) = {bubbleSort, insertionSort, selectionSort, countingSort, mergeSort, mergeSortOpt, heapSort};
-  std::string fnNames[] = {"Bubble_Sort", "Insertion_Sort", "Selection_Sort", "Counting_Sort", "Merge_Sort", "Optimized_Mergesort", "Heap_Sort"};
+  int numberOfSorts = 8;
+  void (*fns[])(double[],int ) = {bubbleSort, insertionSort, selectionSort, countingSort, mergeSort, mergeSortOpt, heapSort, quickSort};
+  std::string fnNames[] = {"Bubble_Sort", "Insertion_Sort", "Selection_Sort", "Counting_Sort", "Merge_Sort", "Optimized_Mergesort", "Heap_Sort", "Quick_Sort"};
   std::vector<int> sizes = {10, 20, 30, 40 ,50 , 60, 70, 80, 90, 100,200, 300, 400, 500, 600, 700, 800, 900, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000};
-  std::ostream outfile(argv[1]);
-  measureFunctionPerformace(numberOfSorts, fns, fnNames, sizes, outfile);
+  std::ofstream outfile(argv[1]);
+  measureFunctionPerformance(numberOfSorts, fns, fnNames, sizes, outfile);
 
   //bonus: Bogo Sort!
-  std::ostream bogoOut = ("bogoOutput.data");
+  std::ofstream bogoOut("bogoOutput.data");
   void (*bogo[])(double[],int) = {bogoSort};
   std::string bogoName[] = {"BOGO_Sort"};
   std::vector<int> bogoSizes = {1,2,3,4,5,6,7,8,9,10,11,12}; // 12 is already pushing it with this one ...
