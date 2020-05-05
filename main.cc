@@ -38,14 +38,9 @@ void measureFunctionPerformance(int numberOfSorts, void (*fns[])(double[],int), 
       printVector(energy_diff, outfile);
     }
     delete[] copy;
-<<<<<<< HEAD
     delete data;
-    //delete arrays 
-=======
-    delete[] data;
-    //delete arrays
     std::cout << "finished function performance iteration for array size " << size << std::endl;
->>>>>>> 78e7a5f61a7d450c6c5a621d2a333390ba5be118
+    //delete arrays 
   } 
 }
 
