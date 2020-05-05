@@ -47,6 +47,7 @@ int main(int argc, char *argv[])
 			//printVector(energy_diff);
 		}
 		delete[] copy;
+		delete[] data;
 		//delete arrays;
 	}
 
