@@ -35,7 +35,7 @@ void quickSort(E a[], int n){
 }
 
 template <typename E>
-static void qsort_optimized(E a[], int lo, int hi){
+static void quickSortOpt(E a[], int lo, int hi){
   if (hi - lo + 1<= THRESHOLD){
     insertionSort(&a[lo], hi - lo + 1);
     break;
