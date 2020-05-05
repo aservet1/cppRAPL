@@ -35,12 +35,8 @@ void measureFunctionPerformance(int numberOfSorts, void (*fns[])(double[],int), 
       if (fnNames[i] == "BOGO_Sort") time_elapsed = stop.timeDifference(start); // higher granularity because small sizes 1-5 go by really quick
       else time_elapsed = stop.timeDifference(start) / 1000000;
       std::vector<double> energy_diff = stop.energyDifference(start);
-<<<<<<< HEAD
-      std::cout << fnNames[i] << " " << size << " " << time_elapsed << " " ;
-=======
       //std::cout << fnNames[i] << " " << size << std::setprecision(20) << " "  << time_elapsed << " " ;
       outfile << fnNames[i] << " " << size << std::setprecision(20) << " "  << time_elapsed << " " ;
->>>>>>> b94f1138ecd4623c44c1aad4141dafe691d321f5
       printVector(energy_diff);
     }
     delete[] copy;
