@@ -38,5 +38,3 @@ int main(void) {
   delete[] array;
   return 0;
 }
-
-
