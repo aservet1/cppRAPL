@@ -1,5 +1,5 @@
 #ifndef HEAP_SORT_HH
-	#define HEAP_SORT_HH
+#define HEAP_SORT_HH
 
 #include <iostream>
 
@@ -116,19 +116,19 @@ operator<<(std::ostream& out, const MaxHeap<T>& heap) {
 
 template <typename E>
 void heapSort(E a[], int n){
-	MaxHeap<E> heap = MaxHeap<E>(a, n, n);
-	for(int i = 0; i < n; ++i){
-		E max = heap.dequeue();
-		a[n- 1 - i] = max;
-	}
+  MaxHeap<E> heap = MaxHeap<E>(a, n, n);
+  for(int i = 0; i < n; ++i){
+    E max = heap.dequeue();
+    a[n- 1 - i] = max;
+  }
 }
 
 template <typename E>
 void printArray(E a[], int size){
-	for (int i=0;i<size;++i){
-        	std::cout << a[i] << " ";
-	}
-	std::cout << std::endl;
+  for (int i=0;i<size;++i){
+    std::cout << a[i] << " ";
+  }
+  std::cout << std::endl;
 }
 
 #endif 
