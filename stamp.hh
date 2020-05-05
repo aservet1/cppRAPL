@@ -21,7 +21,7 @@ class Stamp{
     energy = old.energy;
   }
 
-  int
+  long long
   timeDifference(Stamp start){
     return std::chrono::duration_cast<std::chrono::nanoseconds>(time - start.time).count();	 
   }

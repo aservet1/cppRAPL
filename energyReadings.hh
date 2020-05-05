@@ -17,17 +17,11 @@ extern "C" {
 
 struct EnergyArrays{
   int n;
-  double *dram;
-  double *package;
   double *core;
   EnergyArrays(int n): n(n){
-    dram = new double[n];
-    package = new double[n];
     core = new double[n];
   }
   ~EnergyArrays(){
-    delete[] dram;
-    delete[] package;
     delete[] core;
   }
 
@@ -61,9 +55,7 @@ EnergyArrays* getEnergySamples(int iter, int delay){
     std::vector<double> before = getEnergyReadings();
     std::this_thread::sleep_for(std::chrono::milliseconds(delay * (rand() % 3 + 1)));
     std::vector<double> after  = getEnergyReadings();
-    e->dram[i] = after[0] - before[0];
     e->core[i]  = after[1] - before[1];
-    e->package[i]  = after[2] - before[2];
   }
   return e;
 }
