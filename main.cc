@@ -4,10 +4,11 @@
 #include "algorithms/sorts.hh"
 #include "algorithms/mergeSort.hh"
 #include "algorithms/heapSort.hh"
-#include <
-//#include "algorithms/quickSort.hh"
-//#include "algorithms/countingSort.hh"
-//#include "algorithms/bogoSort.hh"
+#include "algorithms/quickSort.hh"
+#include "algorithms/bubbleSort.hh"
+#include "algorithms/insertionSort.hh"
+#include "algorithms/countingSort.hh"
+#include "algorithms/bogoSort.hh"
 #include "energyReadings.hh"
 #include "stamp.hh"
 #include "helperFunctions.hh"
@@ -46,6 +47,9 @@ int main(int argc, char *argv[]){
     delete[] copy;
     delete[] data;
     //delete arrays;
+  }
+  for(int i = 0; i < 20; i++){
+	  
   }
 
   ProfileDealloc();

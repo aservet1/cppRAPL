@@ -1,8 +1,8 @@
-#include "sorts.hh"
-
 #ifndef QUICK_SORT_HH
 #define QUICK_SORT_HH
 
+#include "sorts.hh"
+#include "insertionSort.hh"
 
 template <typename E>
 static int partition(E a[], int lo, int hi){

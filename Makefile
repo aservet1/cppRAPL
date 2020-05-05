@@ -7,7 +7,7 @@ RAPL_LIBRARY = RAPL-Library/libCPUScaler.a
 all: $(TARGET) .gitignore
 
 $(TARGET): $(CXXFILES) $(HHFILES)
-	g++ $(CXXFILES) $(CXXFLAGS) -L./RAPL-Library -lCPUScaler -o $@
+	g++ -g $(CXXFILES) $(CXXFLAGS) -L./RAPL-Library -lCPUScaler -o $@
 
 .gitignore: $(CXXFILES)
 	cat </dev/null >$@
