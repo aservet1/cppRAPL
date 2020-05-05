@@ -20,15 +20,13 @@
 
 void measureFunctionPerformance(int numberOfSorts, void (*fns[])(double[],int), std::string fnNames[], std::vector<int> sizes, std::ofstream& outfile){
   for(int size : sizes){
-    //EnergyArrays *arrays = getEnergySamples(size, DELAY);
-    double *data = new double[size];
-    genRandomArray(data, size);
+    EnergyArray *data = getEnergySamples(size, DELAY);
     double *copy = new double[size];
     for(int i = 0; i < numberOfSorts; i++){
       if((fnNames[i] == "Bubble_Sort" || fnNames[i] == "Insertion_Sort" || fnNames[i] == "Selection_Sort") && size > 50000){ // don't bother with these for big arrays
         continue;
       }
-      makeCopy(copy, data, size);
+      makeCopy(copy, data->core, size);
       Stamp start;
       fns[i](copy, size);
       Stamp stop;
@@ -40,7 +38,7 @@ void measureFunctionPerformance(int numberOfSorts, void (*fns[])(double[],int), 
       printVector(energy_diff, outfile);
     }
     delete[] copy;
-    delete[] data;
+    delete data;
     //delete arrays 
   } 
 }
@@ -56,7 +54,7 @@ int main(int argc, char *argv[]){
   int numberOfSorts = 8;
   void (*fns[])(double[],int ) = {bubbleSort, insertionSort, selectionSort, countingSort, mergeSort, mergeSortOpt, heapSort, quickSort};
   std::string fnNames[] = {"Bubble_Sort", "Insertion_Sort", "Selection_Sort", "Counting_Sort", "Merge_Sort", "Optimized_Mergesort", "Heap_Sort", "Quick_Sort"};
-  std::vector<int> sizes = {10, 20, 30, 40 ,50 , 60, 70, 80, 90, 100,200, 300, 400, 500, 600, 700, 800, 900, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000};
+  std::vector<int> sizes = {10, 20, 30, 40 ,50 , 60, 70, 80, 90, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000};
   std::ofstream outfile(argv[1]);
   measureFunctionPerformance(numberOfSorts, fns, fnNames, sizes, outfile);
 
