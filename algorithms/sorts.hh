@@ -2,6 +2,8 @@
 #define SORTS_HH
 
 #include <cassert>
+#include <iostream>
+#include <iomanip>
 
 const int THRESHOLD = 10;
 
@@ -16,7 +18,7 @@ template <typename E>
 void genRandomArray(E *arr, int size){
   srand(time(0));
   for(int i = 0 ; i < size; i++){
-    arr[i] = (rand()/rand());
+    arr[i] = (E)(rand()%200);
   }
 }
 

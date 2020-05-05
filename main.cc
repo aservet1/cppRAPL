@@ -7,7 +7,7 @@
 #include "algorithms/quickSort.hh"
 #include "algorithms/bubbleSort.hh"
 #include "algorithms/insertionSort.hh"
-//#include "algorithms/countingSort.hh"
+#include "algorithms/countingSort.hh"
 #include "algorithms/bogoSort.hh"
 #include "energyReadings.hh"
 #include "stamp.hh"
@@ -18,9 +18,11 @@
 int main(int argc, char *argv[]){
   ProfileInit();
 
-  void (*fns[])(double[],int ) = {/*bogoSort,*/ bubbleSort, insertionSort, /*countingSort,*/ mergeSort, mergeSortOpt, quickSort, quickSortOpt, heapSort};
+  int numberOfSorts = 8; //9 when including bogoSort!
 
-  const char *fnNames[] = {/*"Bogo Sort",*/ "Bubble Sort", "Insertion Sort" /*"Counting Sort"*/, "Merge Sort", "Optimized Mergesort", "Quicksort", "Optimized Quicksort", "Heap Sort"};
+  void (*fns[])(double[],int ) = {/*bogoSort,*/ bubbleSort, insertionSort, countingSort, mergeSort, mergeSortOpt, quickSort, quickSortOpt, heapSort};
+
+  const char *fnNames[] = {/*"Bogo Sort",*/ "Bubble Sort", "Insertion Sort", "Counting Sort", "Merge Sort", "Optimized Mergesort", "Quicksort", "Optimized Quicksort", "Heap Sort"};
 	
   std::cout << "len of names " << sizeof(fnNames)/sizeof(char*) << std::endl;
 
@@ -30,7 +32,7 @@ int main(int argc, char *argv[]){
     double *data = new double[size];
     genRandomArray(data, size);
     double *copy = new double[size];
-    for(int i = 0; i < 6; i++){
+    for(int i = 0; i < numberOfSorts; i++){
       if((i == 0 || i == 1) && size > 1000){
         continue;
       }
