@@ -8,6 +8,7 @@ static int findPivot(E a[], int i, int j){
   return (i+j)/2;
 }
 
+
 template <typename E>
 static int partition(E a[], int lo, int hi){
   E pivot = a[hi];
@@ -40,9 +41,9 @@ static void qsort_optimized(E a[], int lo, int hi){
   while (lo < hi) 
 	{
 		// do insertion sort if 10 or smaller
-		if(hi - lo < 10)
+		if(hi - lo + 1 < 10)
 		{
-			insertionSort(a, lo, hi);
+			insertionSort(a, hi - lo + 1);
 			break;
 		}
 		else 
@@ -63,7 +64,7 @@ static void qsort_optimized(E a[], int lo, int hi){
 
 template <typename E>
 void quickSortOpt(E a[], int n){
-  qsort_optimized(a, 0, n - 1);
+  qsort_optimized(a, 0, n);
 }
 
 
