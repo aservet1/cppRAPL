@@ -6,10 +6,6 @@
 #include <iomanip>
 #include <cstdlib>
 #include <ctime>
-#include "algorithms/mergeSort.hh"
-#include "algorithms/heapSort.hh"
-#include "algorithms/quickSort.hh"
-#include "algorithms/sorts.hh"
 
 
 extern "C"

@@ -23,7 +23,7 @@ EnergyStatCheck() returns energy readings for three different power domains: DRA
 
 ## How are we measuring runtime?
 Using std::chrono we can timestamp before and after a function runs and take the difference to measure the elapsed time.
-@TODO -- milton, elaborate on the exact implementation
+To facilitate reading runtime and power consumption, we have class Stamp to take both measurements. A stamp object is created at the beggining and end of readings. In this case it is done before and after the algorithms are run. When the objects are created, they store the current clock time using std::chrono and power consumption using the RAPL library. Member functions are used to return the time or power difference between two Stamp objects.
 
 ## Performance analysis implementation
 Our sorting algorithms are accessed in an array of function pointers. We iterate through pass each algorithm into a performance analysis function @TODO what's it called?
