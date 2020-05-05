@@ -36,18 +36,26 @@ void quickSort(E a[], int n){
 
 template <typename E>
 static void qsort_optimized(E a[], int lo, int hi){
-  if (hi - lo + 1<= THRESHOLD) insertionSort(&a[lo], hi - lo + 1);
+  if (hi - lo + 1<= THRESHOLD){
+    insertionSort(&a[lo], hi - lo + 1);
+    break;
+  }
   int pivotindex = findPivot(a, lo, hi);
   swap(a, pivotindex, hi);
   int k = partition(a, lo, hi-1, a[hi]);
   swap(a, k, hi);
-  qsort(a, lo, k - 1);
-  qsort(a, k + 1, hi);
+  qsort_optimized(a, lo, k - 1);
+  qsort_optimized(a, k + 1, hi);
 }
 
 template <typename E>
 void quickSort_optimized(E a[], int n){
   qsort_optimized(a, 0, n - 1);
 }
+
+
+
+
+
 
 #endif

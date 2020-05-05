@@ -128,10 +128,10 @@ class Stamp{
     time = old.time;
     energy = old.energy;
   }
-	
-  double
+
+  int
   timeDifference(Stamp start){
-    return std::chrono::duration_cast<std::chrono::milliseconds>(time - start.time).count();
+    return std::chrono::duration_cast<std::chrono::nanoseconds>(time - start.time).count();	 
   }
 	
   std::vector<double>
@@ -146,5 +146,13 @@ class Stamp{
     return energy_difference;
   }
 };
+
+template <typename E>
+void makeCopy(E *copyto, E *copyfrom, int size){
+  for(int i = 0; i < size; i++){
+    copyto[i] = copyfrom[i];
+  }
+  return;
+}
 
 

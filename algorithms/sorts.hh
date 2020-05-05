@@ -1,6 +1,8 @@
 #ifndef SORTS_HH
 #define SORTS_HH
 
+#include <cassert>
+
 const int THRESHOLD = 10;
 
 template <typename E>
