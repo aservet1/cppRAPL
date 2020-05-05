@@ -1,6 +1,6 @@
 # Time and Energy Analysis of Sorting Algorithms
 
-This application measures the runtime and power consumption of sorting algorithms in C++
+This application measures the runtime and energy consumption of sorting algorithms in C++
 
 ## Sorting algorithms analyzed
 @TODO MAKE SURE THSE ARE THE SORTS WE ARE ACTUALLY USING
@@ -10,12 +10,11 @@ This application measures the runtime and power consumption of sorting algorithm
 + Merge Sort
 + Merge Sort Optimized
 + Quicksort
-+ Quicksort Optimized
 + Counting Sort
 + Bogosort
 
 ## How are we measuring power consumption?
-The RAPL library, implemented in C, is adapted from an independent research project, [jRAPL](https://github.com/aservet1/jRAPL), that Rutvik and Alejandro are working on for Professor Yu David Liu. @TODO: link to the jRAPL repo
+The RAPL library, implemented in C, is adapted from an independent research project, [jRAPL](https://github.com/aservet1/jRAPL), that Rutvik and Alejandro are working on for Professor Yu David Liu.
 
 RAPL stands for Running Average Power Limit, a way of monitoring and controlling a computer's energy levels. It works on Intel processors by reading and writing the Model Specific Registers (MSRs). In this project, we only directly access one function from the library, EnergyStatCheck(), which returns total energy consumption. We call the function before and after running our sorting algorithms and take the difference in readings.
 EnergyStatCheck() returns energy readings for three different power domains: DRAM, CPU, and Package. Package is the entire CPU socket. Our algorithms will therefore be measured with respect to energy consumption in each of these three power domains.
@@ -34,3 +33,4 @@ All of the sorting algorithms analyzed are accessed from an array of function po
 ## Graphing results
 Our graphs show the expected results. Bubble sort and insertion sort are the worse performing algorithms. Merge sort,    ,  all perform comparably with O(nlogn). 
 There is a clear correlation between run time and power consumption. This is to be expected, and there are no unexpected differences between the metrics. The run time and power consumption graphs grow at the same time.
+We have used the python script to plot the results after writing the readings to a text file.
