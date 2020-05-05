@@ -2,7 +2,7 @@
 #define HEAP_SORT_HH
 
 #include <iostream>
-
+#include <iomanip>
 #include <cassert>
 #include <cctype>
 #include <cstdlib>
@@ -128,7 +128,7 @@ void printArray(E a[], int size){
   for (int i=0;i<size;++i){
     std::cout << a[i] << " ";
   }
-  std::cout << std::endl;
+  std::cout << std::setprecision(10) << std::endl;
 }
 
 #endif 
