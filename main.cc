@@ -10,12 +10,6 @@
 
 #define DELAY 2
 
-void genRandomArray(double *arr, int size){
-	srand(time(0));
-	for(int i = 0 ; i < size; i++){
-		arr[i] = (rand()%100000)/100000;
-	}
-}
 
 int main(int argc, char *argv[])
 {
