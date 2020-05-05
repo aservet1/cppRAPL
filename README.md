@@ -3,7 +3,7 @@
 This application measures the runtime and power consumption of sorting algorithms in C++
 
 ## Sorting algorithms analyzed
-@TODO anything else
+@TODO MAKE SURE THSE ARE THE SORTS WE ARE ACTUALLY USING
 + Bubble Sort
 + Insertion Sort
 + Merge Sort
