@@ -41,7 +41,7 @@ int main(int argc, char *argv[]){
       Stamp stop;
       double time_elapsed = stop.timeDifference(start) / 1000000;
       std::vector<double> energy_diff = stop.energyDifference(start);
-      std::cout << fnNames[i] << " " << size << " "  << time_elapsed << " " ;
+      std::cout << fnNames[i] << " " << size << " " << time_elapsed << " " ;
       printVector(energy_diff);
     }
     delete[] copy;
