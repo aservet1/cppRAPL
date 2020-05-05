@@ -1,5 +1,5 @@
 CXXFILES = main.cc #and also the one(s) that define(s) the sorting algorithms
-HHFILES = algorithms/*.hh *.hh
+HHFILES = SortingAlgorithms/*.hh *.hh
 CXXFLAGS = -std=c++11
 TARGET = main
 RAPL_LIBRARY = RAPL-Library/libCPUScaler.a

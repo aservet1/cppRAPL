@@ -24,12 +24,6 @@ struct EnergyArrays{
   ~EnergyArrays(){
     delete[] core;
   }
-
-  void printArrays(){
-    for(int i = 0; i < n; i++){
-      std::cout << std::setprecision(20) << "DRAM: " << dram[i] << "  PACKAGE: " << package[i] << "  CORE: " << core[i] << std::endl;
-    }
-  }
 };
 
 
