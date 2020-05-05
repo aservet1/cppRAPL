@@ -23,14 +23,14 @@ split(std::string line, char delim){
 
 template <typename E>
 void
-printVector(std::vector<E> vec){
-  std::ostream& out = std::cout;
-  out.precision(15);
+printVector(std::vector<E> vec, std::ofstream& outfile){
+  //std::ostream& out = std::cout;
+  outfile.precision(15);
   auto it = vec.cbegin();
   for(; it != vec.cend(); it++){
-    std::cout << std::fixed << *it << " ";
+    outfile << std::fixed << *it << " ";
   }
-  std::cout << std::endl;
+  outfile << std::endl;
 }
 
 template <typename E>
