@@ -41,7 +41,8 @@ void measureFunctionPerformance(int numberOfSorts, void (*fns[])(double[],int), 
     }
     delete[] copy;
     delete[] data;
-    //delete arrays 
+    //delete arrays
+    std::cout << "finished function performance iteration for array size " << size << std::endl;
   } 
 }
 
