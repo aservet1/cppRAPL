@@ -20,7 +20,10 @@ template <typename E>
 static int hash(E d){
   return d * 10000;
 }
-
+// the hashing function exists because we know E will be a double for the purposes of this project
+// we need to map it to an int, so multiply / divide by 10000. there is a loss of precision inherent
+// in the hashing algorithm if the float extends farther than 5 decimal places, so that's a tradeoff
+// that you need to be willing to make if you use this sort
 template <typename E>
 static E unhash(E i){
   return i / 10000;
