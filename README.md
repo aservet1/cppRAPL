@@ -31,11 +31,12 @@ To facilitate reading runtime and power consumption, we have class Stamp to take
 
 All of the sorting algorithms analyzed are accessed from an array of function pointers. We iterate through each function and use it to sort an array of data. After each iteration of sorting the array, a larger array is used to gather data for larger values of N. We use the stamp class to measure the time and power consumption before and after the sorting. We can then graph the difference for each algorithm at different values of array size N.
 
-All of this is done in a function <code>measureFunctionPerformance()</code>, which takes a list of function pointers, a list of function names (parallel at index to the function pointers), and and array of sizes to iterate through, testing each sorting algorithm per size.
+All of this is done in a function <code>measureFunctionPerformance()</code>, which takes a list of function pointers, a list of function names (parallel at index to the function pointers), and and array of sizes to iterate through, testing each sorting algorithm per size. It generates the arrays to sort, performs a time/energy stamp before and after each sorting algorithm is called, and outputs results to the data file.
 
-All output is redirected to a .data file, which we parse and analyze with a Python script using matplotlib.
+All output is redirected to one .data file, which we parse and graphs with a Python script using matplotlib.
 
 ## Graphing results
-Our graphs show the expected results. Bubble sort and insertion sort are the worse performing algorithms. Merge sort,    ,  all perform comparably with O(nlogn). 
+Our graphs show the expected results. Bubble sort and insertion sort have quadratic performance. Merge sort, Merge sort optimized, Quick sort and Heap sort, all have logarithmic performance. Bogosort is...surprisingly acceptable for sizes of N less than 6, but quickly spirals out of proportion, as we stopped gathering data for sizes of N larger than 12.
+
 There is a clear correlation between run time and energy consumption. This is to be expected, and there are no unexpected differences between the metrics. The run time and energy consumption graphs grow at the same time.
 We have used the python script to plot the results after writing the readings to a text file.

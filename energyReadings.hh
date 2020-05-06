@@ -15,13 +15,13 @@ extern "C" {
   #include "RAPL-Library/CPUScaler_noJNI.h"
 }
 
-struct EnergyArrays{
+struct EnergyArray{
   int n;
   double *core;
-  EnergyArrays(int n): n(n){
+  EnergyArray(int n): n(n){
     core = new double[n];
   }
-  ~EnergyArrays(){
+  ~EnergyArray(){
     delete[] core;
   }
 };
@@ -42,8 +42,8 @@ getEnergyReadings(){
   return ener_info;
 }
 
-EnergyArrays* getEnergySamples(int iter, int delay){
-  EnergyArrays *e = new EnergyArrays(iter);
+EnergyArray* getEnergySamples(int iter, int delay){
+  EnergyArray *e = new EnergyArray(iter);
   srand(rand());
   for (int i = 0; i < iter; i++){
     std::vector<double> before = getEnergyReadings();
