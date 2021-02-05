@@ -2,7 +2,6 @@ CFLAGS = -fPIC -g -c -Wall
 
 CFILES = CPUScaler_noJNI.c arch_spec_noJNI.c msr_noJNI.c
 OFILES = $(CFILES:.c=.o)
-HFILES = $(CFILES:.c=.h)
 
 LIB = libCPUScaler.a
 TARGET = $(LIB) $(OFILES)
