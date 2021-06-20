@@ -1,2 +1,4 @@
 The makefile in here makes a shared library that we will ultimately use
 to access the EnergyStatCheck library to get energy readings
+
+This code was copied from jRAPL at the time, and then the Java and JNI utilities were deleted.
