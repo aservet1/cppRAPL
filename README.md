@@ -14,6 +14,9 @@ Final project for *CS240: Data Structures and Algorithms in C++*
 + Counting Sort
 + Bogosort
 
+![image](https://user-images.githubusercontent.com/54599694/122663221-d2e4a000-d166-11eb-98d0-8497ccf17dab.png)
+
+
 ## How are we measuring power consumption?
 The RAPL library, implemented in C, is adapted from an independent research project, [jRAPL](https://github.com/aservet1/jRAPL), that Rutvik and Alejandro are working on for Professor Yu David Liu.
 
