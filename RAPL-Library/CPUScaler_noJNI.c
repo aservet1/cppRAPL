@@ -16,8 +16,7 @@ static rapl_msr_parameter *parameters;
 static int *fd;
 static uint64_t num_pkg;
 
-/** <Alejandro's Interpretation>
- *  Takes the energy info and packages it into a formatted string... # delimits the 3 energy attribs and @ delimits multiple package readings (1 pkg = 3 energy attribs)
+/** Takes the energy info and packages it into a formatted string... # delimits the 3 energy attribs and @ delimits multiple package readings (1 pkg = 3 energy attribs)
  *	Sets offset to the end of the string by the end of this
  *	I belive the i is an iterator to see how many packages have been put into the string
  *	If more than 1 pkg, puts a @ at the end of the string because there's going to be another set of package info after that
@@ -51,9 +50,8 @@ get_rapl_unit()
 	return rapl_unit;
 }
 
-/** <Alejandro's Interpretation>
- *	Sets up an an energy profile. (*?)What exactly is an energy profile? A bunch of data stored about the current energy state...
- *	reads and stores CPU model, socketnum. calculates wraparound energy.
+/** Allocates necessary state for energy reading (memory, variables, etc).
+ *  reads and stores CPU model, socketnum. calculates wraparound energy.
  *  the 'fd' array is an array of which msr regs. num msr regs is number of packages the computer has
  *  initializes the rapl unit (stuff holding the conversions to translate msr data sections into meaningful 'human-readable' stuff)
  */
@@ -89,20 +87,16 @@ ProfileInit() {
 
 
 
-/** <Alejandro's Interpretation>
- * Gets num of cpu sockets
- */
+/** Gets num of cpu sockets */
 int GetSocketNum() {
 
-  int socketNum = getSocketNum();
+  return getSocketNum();
 
-  return socketNum;
 }
 
 #define MSR_DRAM_ENERGY_UNIT 0.000015
 
-/** <Alejandro's Interpretation>
- *  In short, fills up the energy info buffers appropriately.
+/** In short, fills up the energy info buffers appropriately.
  *	Pass in gpu, dram, cpu, and package buffers. There are num_pkg buffers per type of computer thing. One buffer per package that the computer has.
  *	Filling up the buffers. The for loop is so you get a different reading for all the packages. Reads the msr for that package with fd[i]
  *  Based on the CPU model, it either adds dram info or gpu info. I guess that certain models use gpus and others drams?
@@ -167,8 +161,7 @@ initialize_energy_info(char gpu_buffer[num_pkg][60], char dram_buffer[num_pkg][6
 }
 
 
-/** <Alejandro's Interpretation>
- * Makes a string from the energy info. Initializes energy info with that function above and
+/** Makes a string from the energy info. Initializes energy info with that function above and
  *
  * The first entry is: Dram/uncore gpu energy (depends on the cpu architecture)
  * The second entry is: CPU energy
@@ -258,9 +251,7 @@ EnergyStatCheck() {
 
 }
 
-/** <Alejandro's Interpretation>
- * Free memory allocated by profile init function
- */
+/** Free memory allocated by profile init function */
 void ProfileDealloc()
 {
 	free(fd);
